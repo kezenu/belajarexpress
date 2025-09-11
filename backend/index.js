@@ -1,34 +1,39 @@
-const express = require('express');
-
+import express from 'express';
+import cors from 'cors';
+import session from 'express-session';
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
-const port = 3000;
 
-const dataReverse = () => {
-  const data = 'saya adalah wisnu';
-  const split = data.split(' ');
-  const dataArray = [];
-  for (let word of split) {
-    const reversedWord = word.split('').reverse().join('');
-    dataArray.push(reversedWord);
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: 'auto' },
+  })
+);
+
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+);
+app.use(express.json());
+
+import db from './config/Database.js';
+async function testDb() {
+  try {
+    await db.authenticate();
+    console.log('Server Database Berhasil Jalan');
+  } catch (error) {
+    console.error('Koneksi Gagal', error);
   }
-  return dataArray.join(' ');
-};
+}
 
-app.get('/', (req, res) => {
-  res.send(dataReverse());
-});
+testDb();
 
-const helloWorld = (req, res) => {
-  data = {
-    nama: 'WIsnu',
-  };
-  res.status(200).json({
-    msg: 'Succes',
-    data: data,
-  });
-};
-app.get('/', helloWorld);
-
-app.listen(port, () => {
-  console.log('server berjalan di port 3000');
+app.listen(process.env.APP_PORT, () => {
+  console.log('Server Running');
 });
