@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Sequelize from 'sequelize';
 import db from '../config/Database';
 
@@ -48,3 +49,22 @@ const Users = db.define(
 );
 
 export default Users;
+=======
+import { Sequelize, DataTypes } from 'sequelize';
+import db from '../config/database.js';
+
+const Users = db.define('User', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    validate: {
+      isUUID: true,
+    },
+  },
+  nama: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+>>>>>>> cdd434e979e0e1361448ef83fafe5a0ac686e5df
