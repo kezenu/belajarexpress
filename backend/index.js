@@ -2,8 +2,15 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
+// import UsersRoute from './routes/UsersRoute.js';
+// import ProductRoute from './routes/ProductRoute.js';
 dotenv.config();
 const app = express();
+
+import db from './config/Database.js';
+(async () => {
+  await db.sync();
+})();
 
 app.use(
   session({
@@ -21,18 +28,8 @@ app.use(
   })
 );
 app.use(express.json());
-
-import db from './config/Database.js';
-async function testDb() {
-  try {
-    await db.authenticate();
-    console.log('Server Database Berhasil Jalan');
-  } catch (error) {
-    console.error('Koneksi Gagal', error);
-  }
-}
-
-testDb();
+// app.use(UsersRoute);
+// app.use(ProductRoute);
 
 app.listen(process.env.APP_PORT, () => {
   console.log('Server Running');
