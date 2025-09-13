@@ -1,15 +1,7 @@
 import Product from '../models/ProductModels';
 
-const getProduct = (req, res) => {};
-const getProductByID = (req, res) => {};
-const createProduct = (req, res) => {};
-const updateProduct = (req, res) => {};
-const deleteProduct = (req, res) => {};
-
-export default {
-  getProduct,
-  getProductByID,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-};
+export const getProduct = (req, res) => {};
+export const getProductByID = (req, res) => {};
+export const createProduct = (req, res) => {};
+export const updateProduct = (req, res) => {};
+export const deleteProduct = (req, res) => {};
