@@ -6,7 +6,7 @@ const Users = db.define(
   'users',
   {
     uuid: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
@@ -37,7 +37,23 @@ const Users = db.define(
         notEmpty: true,
       },
     },
-    role: {
+    roleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'role',
+        key: 'id',
+      },
+    },
+  },
+  { freezeTableName: true }
+);
+
+const Role = db.define(
+  'role',
+  {
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    roleName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -45,7 +61,12 @@ const Users = db.define(
       },
     },
   },
-  { freezeTableName: true }
+  {
+    freezeTableName: true,
+  }
 );
 
+Role.hasMany(Users);
+Users.belongsTo(Role, { foreignKey: 'roleId' });
 export default Users;
+export { Role };

@@ -7,7 +7,8 @@ const Product = db.define(
   'product',
   {
     uuid: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       validate: {
@@ -30,7 +31,7 @@ const Product = db.define(
       },
     },
     userId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -40,7 +41,7 @@ const Product = db.define(
   { freezeTableName: true }
 );
 
-Users.hasMany(Product);
+Users.hasMany(Product, { foreignKey: 'userId' });
 Product.belongsTo(Users, { foreignKey: 'userId' });
 
 export default Product;

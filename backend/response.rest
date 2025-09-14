@@ -12,5 +12,6 @@ Content-Type: application/json
     "name":"Wisnu",
     "email":"abc@gmail.com",
     "password":"qbc123",
+    "confPassword":"qbc1",
     "role":"admin"
 }

@@ -14,7 +14,7 @@ export const getUsersById = async (req, res) => {
   try {
     const response = await Users.findOne({
       where: {
-        uuid: req.params.uuid,
+        uuid: req.params.id,
       },
     });
     res.status(200).json(response);
@@ -26,12 +26,17 @@ export const getUsersById = async (req, res) => {
 };
 export const createUsers = async (req, res) => {
   try {
-    const data = req.body;
+    const { name, email, password, confPassword, role } = req.body;
+    if (password !== confPassword) {
+      res.status(400).json({
+        msg: 'Password dan Konffirmasi Password tidak cocok',
+      });
+    }
     const response = await Users.create({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      role: data.role,
+      name: name,
+      email: email,
+      password: password,
+      role: role,
     });
     res.status(201).json(response);
   } catch (error) {
@@ -40,5 +45,18 @@ export const createUsers = async (req, res) => {
     });
   }
 };
-export const updateUsers = (req, res) => {};
+export const updateUsers = async (req, res) => {
+  try {
+    const response = await Users.update({
+      where: {
+        uuid: req.params.id,
+      },
+    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({
+      msg: error.message,
+    });
+  }
+};
 export const deleteUsers = (req, res) => {};

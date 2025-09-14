@@ -24,17 +24,17 @@ app.use(
   })
 );
 
-// import './models/UserModels.js';
-// import './models/ProductModels.js';
-// import db from './config/Database.js';
-// (async () => {
-//   try {
-//     await db.sync({ force: true });
-//     console.log('Database synced!');
-//   } catch (err) {
-//     console.error('Sync error:', err);
-//   }
-// })();
+import './models/UserModels.js';
+import './models/ProductModels.js';
+import db from './config/Database.js';
+(async () => {
+  try {
+    await db.sync({ force: true });
+    console.log('Database synced!');
+  } catch (err) {
+    console.error('Sync error:', err);
+  }
+})();
 
 app.use(express.json());
 app.use(UsersRoute);
