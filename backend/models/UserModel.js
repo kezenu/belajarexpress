@@ -37,14 +37,6 @@ const Users = db.define(
         notEmpty: true,
       },
     },
-    roleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'role',
-        key: 'id',
-      },
-    },
   },
   { freezeTableName: true }
 );
@@ -66,7 +58,7 @@ const Role = db.define(
   }
 );
 
-Role.hasMany(Users);
+Role.hasMany(Users, { foreignKey: 'roleId' });
 Users.belongsTo(Role, { foreignKey: 'roleId' });
 export default Users;
 export { Role };

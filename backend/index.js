@@ -3,7 +3,7 @@ import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import UsersRoute from './routes/UsersRoute.js';
-import ProductRoute from './routes/ProductRoute.js';
+import ProfileRoute from './routes/ProfileRoute.js';
 
 dotenv.config();
 const app = express();
@@ -24,8 +24,8 @@ app.use(
   })
 );
 
-import './models/UserModels.js';
-import './models/ProductModels.js';
+import './models/UserModel.js';
+import './models/ProfileModel.js';
 import db from './config/Database.js';
 (async () => {
   try {
@@ -38,7 +38,7 @@ import db from './config/Database.js';
 
 app.use(express.json());
 app.use(UsersRoute);
-app.use(ProductRoute);
+app.use(ProfileRoute);
 
 app.listen(process.env.APP_PORT, () => {
   console.log('Server Running');
