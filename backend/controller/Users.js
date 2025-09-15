@@ -30,7 +30,7 @@ export const createUsers = async (req, res) => {
     const { name, email, password, confPassword, role } = req.body;
     if (password !== confPassword) {
       res.status(400).json({
-        msg: 'Password dan Konffirmasi Password tidak cocok',
+        msg: 'Password dan Konfirmasi Password tidak cocok',
       });
     }
     const hashPassword = await argon2.hash(password);
