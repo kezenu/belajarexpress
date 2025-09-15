@@ -1,7 +1,7 @@
 GET http://localhost:5000/users
 
 ###
-GET http://localhost:5000/users/ba91b276-bb3b-41ed-9080-62a1df8e452b
+GET http://localhost:5000/users/
 
 
 ###
@@ -12,6 +12,6 @@ Content-Type: application/json
     "name":"Wisnu",
     "email":"abc@gmail.com",
     "password":"qbc123",
-    "confPassword":"qbc1",
+    "confPassword":"qbc123",
     "role":"admin"
 }
